@@ -10,7 +10,8 @@ class TomBot
   end
 
   def start
-    puts 'hello world'
+    client = Slack::Web::Client.new
+    p client.auth_test
   end
 
 end
