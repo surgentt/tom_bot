@@ -22,7 +22,7 @@ class TomBot
         slack_message(data.channel, current_weather_msg)
       when '<@UEPM3KUTH> Weather tomorrow' then 
         slack_message(data.channel, weather_tomorrow_msg)
-      when /^bot/ then
+      else
         slack_message(data.channel, "Sorry <@#{data.user}>, what?")
       end
     end
@@ -45,7 +45,7 @@ class TomBot
     def weather_tomorrow_msg
       tmrw_forecast = ForecastIO.forecast(40.7128, -74.0060,  time: (Time.now+1.day).to_i)['currently']
       text_response = "Weather in 24 Hours\n"
-      text_response += ('Summary: '     + tmrw_forecast['summary'] + "\n")
+      text_response += ('Summary: '      + tmrw_forecast['summary'] + "\n")
       text_response += ('Temperature: ' + tmrw_forecast['temperature'].to_s + "\n")
       text_response += ('Wind Speed: '  + tmrw_forecast['windSpeed'].to_s  + "\n")
       text_response += ('Precipitation Propbability: ' + tmrw_forecast['precipProbability'].to_s  + "\n")
